@@ -16,12 +16,14 @@ use Illuminate\Support\Facades\Route;
 
 
 
-Route::apiResource('contact',\App\Http\Controllers\ContactController::class)->middleware('auth:sanctum');
-
-
+Route::apiResource('contact',\App\Http\Controllers\ContactController::class); //->middleware('auth:sanctum')
 Route::apiResource('post',\App\Http\Controllers\PostController::class)->middleware('auth:sanctum');
 
 
 Route::post('login',[\App\Http\Controllers\AuthController::class,'login']);
 Route::post('register',[\App\Http\Controllers\AuthController::class,'register']);
 Route::get('logout',[\App\Http\Controllers\AuthController::class,'logout'])->middleware(['auth:sanctum']);
+
+Route::middleware('auth:sanctum')->group(function (){
+
+});

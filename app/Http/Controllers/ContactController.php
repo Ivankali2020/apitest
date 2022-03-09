@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreContactRequest;
 use App\Http\Requests\UpdateContactRequest;
+use App\Http\Resources\ContactResource;
 use App\Models\Contact;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -17,7 +18,7 @@ class ContactController extends Controller
      */
     public function index()
     {
-        $contacts = Contact::all();
+        $contacts = ContactResource::collection(Contact::all());
 
         return response()->json($contacts);
     }
@@ -49,7 +50,10 @@ class ContactController extends Controller
         if(is_null($result)){
             return response()->json(['message'=>'not found']);
         }
-        return response()->json($result);
+        return response()->json([
+            'message' => 'success',
+            'data' => new ContactResource($result)
+        ]);
     }
 
     /**

@@ -25,7 +25,7 @@ class UpdateContactRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'min:3|max:32|unique:contacts,name,',
+            'name' => 'min:3|max:32|unique:contacts,name,'.$this->contact,
             'phone'=> 'regex:/^([0-9\s\-\+\(\)]*)$/|min:10',
             'email' => 'email|min:4',
             'address' => 'min:5|max:100',
